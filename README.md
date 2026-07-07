@@ -1,87 +1,57 @@
-# Welcome to React Router!
+# React Router Site
 
-A modern, production-ready template for building full-stack React applications using React Router.
+The React Router Site build the following tech stack combination.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+- React for UI and interaction design
+- React Router for routing
+- Vite for web building
+- TypeScript for static typing
+- Tailwind for UI styling 
 
-## Features
-
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
-
-## Getting Started
-
-### Installation
-
-Install the dependencies:
-
-```bash
-npm install
+## Push to GitHub repository
+```
+git init
+git add .
+git commit -m "The Nth commit on date."
+git remote rm origin
+git branch -M main
+git remote add origin git@github.com:robin-artemstein/react-router-site.git
+git push -u origin main
 ```
 
-### Development
+## Installation
 
-Start the development server with HMR:
+Install Bun first
 
-```bash
-npm run dev
+https://bun.sh
+
+Then install dependencies:
 ```
-
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
-
-```bash
-npm run build
+bun install
+bun dev
 ```
-
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
+## Project structure
 ```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
+react-router-site/
+├── public/
+│   └── vite.svg
+├── app/
+│   ├── components/
+│   │   └── Navbar.tsx    # Navigation bar stick on the top of the page
+│   ├── routes/
+│   │   ├── About.tsx     # About us page
+│   │   ├── Contact.tsx   # Contact us page
+│   │   ├── home.tsx      # Homepage
+│   │   ├── Pricing.tsx   # Predictable pricing page
+│   │   └── Services.tsx  # Our services page
+│   ├── root.tsx          # Router and layout configuration
+│   ├── main.tsx
+│   ├── vite-env.d.ts
+│   └── index.css         # Tailwind + global styles
+├── index.html
+├── vite.config.ts
+├── tailwind.config.js    # (if needed)
+├── tsconfig.json
 ├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
+└── README.md             # Read me documentation
 ```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
