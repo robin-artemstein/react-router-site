@@ -3,7 +3,7 @@
 The React Router Site build the following tech stack combination.
 
 - React for UI and interaction design
-- React Router for routing
+- React Router V8 for routing
 - Vite for web building
 - TypeScript for static typing
 - Tailwind for UI styling 
