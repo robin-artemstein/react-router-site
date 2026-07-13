@@ -7,6 +7,7 @@ The React Router Site build the following tech stack combination.
 - Vite for web building
 - TypeScript for static typing
 - Tailwind for UI styling 
+- Motion for page transition animation
 
 ## Push to GitHub repository
 ```

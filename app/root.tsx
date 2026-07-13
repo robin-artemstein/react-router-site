@@ -1,29 +1,11 @@
-import {
-  isRouteErrorResponse,
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-} from "react-router";
-
-import type { Route } from "./+types/root";
-import "./app.css";
+import React from "react";
+import { Links, Meta, Scripts, ScrollRestoration, useLocation, useOutlet } from "react-router";
+import { AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import "./app.css";
 
-export const links: Route.LinksFunction = () => [
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
-  {
-    rel: "preconnect",
-    href: "https://fonts.gstatic.com",
-    crossOrigin: "anonymous",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
-  },
-];
-
+// The Document Shell Layout
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -31,11 +13,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
-        <title>React Router Site</title>
         <Links />
       </head>
-      <body>
-        <Navbar /><br/><br/>
+      <body className="bg-neutral-900 antialiased min-h-screen flex flex-col">
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -44,35 +24,29 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+// App shell manager orchestrating core route switching animations
 export default function App() {
-  return <Outlet />;
-}
-
-export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  let message = "Oops!";
-  let details = "An unexpected error occurred.";
-  let stack: string | undefined;
-
-  if (isRouteErrorResponse(error)) {
-    message = error.status === 404 ? "404" : "Error";
-    details =
-      error.status === 404
-        ? "The requested page could not be found."
-        : error.statusText || details;
-  } else if (import.meta.env.DEV && error && error instanceof Error) {
-    details = error.message;
-    stack = error.stack;
-  }
+  const location = useLocation();
+  const element = useOutlet();
 
   return (
-    <main className="pt-16 p-4 container mx-auto">
-      <h1>{message}</h1>
-      <p>{details}</p>
-      {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
-          <code>{stack}</code>
-        </pre>
-      )}
-    </main>
+    <div className="flex flex-col min-h-screen">
+      {/* Persistent Navigation Header */}
+      <Navbar />
+
+      {/* Main Container Core Layout */}
+      <main className="flex-1 flex flex-col justify-center max-w-4xl w-full mx-auto px-6 py-12 relative">
+        {/* 
+          mode="wait" forces the current view component to execute its exit 
+          animation framework completely before mounting the new view.
+        */}
+        <AnimatePresence mode="wait">
+          {element && React.cloneElement(element, { key: location.pathname })}
+        </AnimatePresence>
+      </main>
+
+      {/* Persistent Footer Layout */}
+      <Footer />
+    </div>
   );
 }

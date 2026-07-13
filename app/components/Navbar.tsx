@@ -1,15 +1,35 @@
-import { Link } from "react-router";
+import { NavLink } from "react-router";
 
 export default function Navbar() {
-    return (
-        <nav>
-            <div className="flex flex-wrap justify-center gap-6 bg-gray-800 font-semibold text-xl">
-                <div className="text-white hover:text-green-500"><Link to="/">Home</Link></div>
-                <div className="text-white hover:text-green-500"><Link to="/about">About</Link></div>
-                <div className="text-white hover:text-green-500"><Link to="/pricing">Pricing</Link></div>
-                <div className="text-white hover:text-green-500"><Link to="/services">Services</Link></div>
-                <div className="text-white hover:text-green-500"><Link to="/contact">Contact</Link></div>
-            </div>
+  const links = [
+    { name: "Homepage", to: "/" },
+    { name: "About", to: "/about" },
+    { name: "Projects", to: "/projects" },
+    { name: "Services", to: "/services" },
+    { name: "Contact", to: "/contact" },
+  ];
+
+  return (
+    <header className="sticky top-0 z-50 w-full bg-neutral-900 shadow-lg shadow-neutral-500">
+      <div className="py-2 flex items-center justify-center">
+        <nav className="flex space-x-1 sm:space-x-2">
+          {links.map((link) => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              className={({ isActive }) =>
+                `px-3 py-2 rounded-md text-xl font-bold transition-all duration-300 ${
+                  isActive
+                    ? "text-violet-400"
+                    : "text-neutral-400 hover:text-slate-100"
+                }`
+              }
+            >
+              {link.name}
+            </NavLink>
+          ))}
         </nav>
-    )
+      </div>
+    </header>
+  );
 }
